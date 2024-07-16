@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Grocery Items</title>
+    <style>
+        /* Optional: Add some basic CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selected Grocery Items</h1>
 
+    <div id="selectedItems">
+        <!-- Selected items will be displayed here -->
+    </div>
+
+    <script>
+        // Function to parse URL parameters
+        function parseQueryParams() {
+            const queryString = window.location.search.substring(1);
+            const urlParams = new URLSearchParams(queryString);
+            return urlParams.getAll('groceryItem');
+        }
+
+        // Function to display selected items
+        function displaySelectedItems() {
+            const items = parseQueryParams();
+
+            if (items.length > 0) {
+                const itemList = `<ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+                document.getElementById('selectedItems').innerHTML = itemList;
+            } else {
+                document.getElementById('selectedItems').innerHTML = '<p>No items selected</p>';
+            }
+        }
+
+        // Call displaySelectedItems when the page loads
+        displaySelectedItems();
+    </script>
+</body>
+</html>
